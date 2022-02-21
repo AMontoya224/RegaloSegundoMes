@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Present
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+    </head>
+    <body>
+        <div class="reg-vent">
+            <div class="reg-vent-box column">
+                <h1 class="pink-T">
+                    REGISTRATE
+                </h1>
+                <div class="error red-T">
+                    {% with messages = get_flashed_messages(category_filter=['register']) %}
+                        {% for message in messages %}
+                            <p>
+                                {{message}}
+                            </p>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+                <form action="/register" method="POST">
+                    <input type="text" id="first_name" name="first_name" placeholder="Nombre"/>
+                    <input type="text" id="last_name" name="last_name" placeholder="Apellido"/>
+                    <input type="text" id="email" name="email" placeholder="E-mail"/>
+                    <input type="password" id="password" name="password" placeholder="Contraseña"/>
+                    <input type="password" id="confirmarPassword" name="confirmarPassword" placeholder="Confirmar contraseña"/>
+                    <p class="p-reg">
+                        ¿Ya eres miembro? <span onclick="mostrar_I()">Inicia sesion</span>
+                    </p>
+                    <button type="submit" class="btn-purple">
+                        Registrar
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="init-vent">
+            <div class="init-vent-box column">
+                <h1 class="pink-T">
+                    INICIAR SESION
+                </h1>
+                <div class="error red-T">
+                    {% with messages = get_flashed_messages(category_filter=['login']) %}
+                        {% for message in messages %}
+                            <p>
+                                {{message}}
+                            </p>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+                <form action="/login" method="POST">
+                    <p class="p-reg">
+                        ¿Eres nuevo en este sitio? <span onclick="mostrar_R()">Registrate</span>
+                    </p>
+                    <input type="text" id="emailUser" name="emailUser" placeholder="E-mail"/>
+                    <input type="password" id="passwordUser" name="passwordUser" placeholder="Contraseña"/>
+                    <button type="submit" class="btn-purple">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+    </body>
+</html>

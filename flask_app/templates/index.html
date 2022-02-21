@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Regalo 
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/style2.css') }}">
+    </head>
+    <body>
+        <div class="cookie1">
+            <h1>
+                Instructions for use:
+            </h1>
+            <ul>
+                <li>All buttons have built-in functions, enjoy discovering them</li>
+                <li>Each box represents a beautiful situation that we live in, you will see that I tried to incorporate all that I could</li>
+                <li>Try not to increase or decrease the size of the page. There was a lot of work to make it all add up</li>
+                <li>Don't worry, I'm not accessing your webcam....</li>
+                <li>That's all, Happy first month chikistrikis!! ;)</li>
+            </ul>
+            <img src="{{ url_for('static', filename='./images/corazon3.png') }}" onclick="ocultar(this)" alt="corazon logo">
+        </div>
+        <div class="cookie2">
+            <img src="{{ url_for('static', filename='./images/corazon3.png') }}" onclick="ocultar(this)" alt="corazon logo">
+        </div>
+        <header>
+            <div class="header">
+                <h1 class="title">
+                    LOVECorner
+                </h1>
+                <div class="datos">
+                    <p>
+                        Welcome, {{ variables[1] }}
+                    </p>
+                    <p>
+                        As cute as ever
+                    </p>
+                </div>
+                <form action="/logout" method="POST">
+                    <button type="submit" class="boton">
+                        <img src="{{ url_for('static', filename='./images/user.png') }}" alt="user logo">Logout
+                    </button>
+                </form>
+            </div>
+            <img class="marco" src="{{ url_for('static', filename='./images/marco.png') }}" alt="marco">
+        </header>
+        <main>
+            <div class="contenedor">
+                <div class="sub-4">
+                    <div class="sub-izq">
+                        <h2>
+                            Our story began...
+                        </h2>
+                        <p>
+                            On a trip who would have thought that everything would change, that I would meet a 
+                            little person so special to me. From that moment I knew that we would have a good 
+                            future together, and I was not wrong.
+                        </p>
+                    </div>
+                    <img class="foto1" src="{{ url_for('static', filename='./images/foto1.jpg') }}" alt="foto 1" onclick="fullpantalla(this)">
+                </div>
+                <div class="sub-4 sub-5">
+                    <div class="sub-izq">
+                        <h2>
+                            And it's been 3 months!!
+                        </h2>
+                        <p>
+                            Two months since we met and one month since we started this beautiful relationship, 
+                            each day more beautiful than the previous one, full of love.
+                        </p>
+                    </div>
+                    <div class="sub-der">
+                        <img class="foto1" src="{{ url_for('static', filename='./images/foto2.jpg') }}" alt="foto 2" onclick="fullpantalla(this)">
+                        <img class="foto2" src="{{ url_for('static', filename='./images/foto3.jpg') }}" alt="foto 3" onclick="fullpantalla(this)">
+                        <img class="foto3" src="{{ url_for('static', filename='./images/foto4.jpg') }}" alt="foto 4" onclick="fullpantalla(this)">
+                    </div>
+                </div>
+            </div>
+            <div class="conte">
+                <div class="contenedor-0">
+                    <h5>
+                        Comments
+                    </h5>
+                    {% for comment in CommentList %}
+                        <h6>
+                            By: {{comment['first_name']}},  {{comment['comments.created_at']}}
+                        </h6>
+                        <div>
+                            <p class="text">
+                                {{comment['comment']}}
+                            </p>
+                            <form action="/comments/{{comment['comments.id']}}/destroy" method="POST">
+                                <button type="submit" class="btn-grad2"> 
+                                    Delete 
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                    <form action="/comments/new" method="POST">
+                        <textarea placeholder="Escribe un comentario..." id="comment" name="comment"></textarea>
+                        <button type="submit" class="btn-grad2"> 
+                            Submit 
+                        </button>
+                    </form>
+                </div>
+                <div class="contenedor-1">
+                    <h3>
+                        From 1 to 100, How much do you love me?
+                    </h3>
+                    <div class="progress-bar" onclick="barra()">
+                        <span class="min-num">0</span>
+                        <span class="max-num">100</span>
+                        <div class="pro-bar"></div>
+                        <div class="block">
+                            <div>
+                                0
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mensaje1"></p>
+                </div>
+            </div>
+            
+            
+            <div class="contenedor-2">
+                <h2>
+                    We obviously make a cute couple!
+                </h2>
+                <div class="sub-6">
+                    <div class="sub-7">
+                        <img src="{{ url_for('static', filename='./images/foto5.jpg') }}" alt="foto 5" onclick="fullpantalla(this)">
+                        <button class="descripcion" onclick="like(this)">❤ 83</button>
+                    </div>
+                    <p>
+                        +
+                    </p>
+                    <div class="sub-7">
+                        <img src="{{ url_for('static', filename='./images/foto6.jpg') }}" alt="foto 6" onclick="fullpantalla(this)">
+                        <button class="descripcion" onclick="like(this)">❤ 68</button>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-3">
+                <video class="video1" src="{{ url_for('static', filename='./videos/PensaEmMim.mp4') }}" onmouseover="videoplay(this)" onmouseout="videopause(this)" id="video" loop></video> <!--350 465-->
+                <div class="sub-1">
+                    <div class="sub-2">
+                        <p>
+                            Love these were our first two songs that we passed, and how could it be otherwise, they were in foreign languages, you in Italian and I in Portuguese, the rarest :v
+                        </p>
+                        <video class="video2" src="{{ url_for('static', filename='./videos/felicita.mp4') }}" onmouseover="videoplay(this)" onmouseout="videopause(this)" id="video" loop></video>
+                    </div>
+                    <p>
+                        Happiness is spending time with you my sweetheart, our moments are incomparable, that's why time flies when we see each other.
+                    </p>
+                </div>
+                <div class="sub-3">
+                    <video class="video3" src="{{ url_for('static', filename='./videos/energia.mp4') }}" onmouseover="videoplay(this)" onmouseout="videopause(this)" id="video" loop></video>
+                    <video class="video3" src="{{ url_for('static', filename='./videos/piso21.mp4') }}" onmouseover="videoplay(this)" onmouseout="videopause(this)" id="video" loop></video>
+                    <video class="video3" src="{{ url_for('static', filename='./videos/unaLady.mp4') }}" onmouseover="videoplay(this)" onmouseout="videopause(this)" id="video" loop></video>
+                </div>
+            </div>
+            <div class="contenedor-4">
+                <div class="sub-8">
+                    <p>
+                        But look how she looks in her pretty dress :v
+                    </p>
+                    <img class="autor" src="{{ url_for('static', filename='./images/foto7.jpg') }}" alt="foto 7" onclick="fullpantalla(this)">
+                </div>
+                <div class="sub-8">
+                    <img class="autor" src="{{ url_for('static', filename='./images/foto9.jpg') }}" alt="foto 9" onclick="fullpantalla(this)">
+                    <p>
+                        We look so cute together
+                    </p>
+                    <p class="corazon">
+                        ❤
+                    </p>
+                </div>
+                <div class="sub-8">
+                    <p>
+                        Stay with the one who looks at you like that 🙈
+                    </p>
+                    <img class="autor" src="{{ url_for('static', filename='./images/foto8.jpg') }}"alt="foto 8" onclick="fullpantalla(this)">
+                </div>
+            </div>
+        </main>
+        <footer>
+            <img class="autor" src="{{ url_for('static', filename='./images/perfil.jpg') }}" alt="foto autor" onclick="fullpantalla(this)">
+            <div class="informacion">
+                <h3>
+                    Andres Montoya Angulo
+                </h3>
+                <p>
+                    Electronic Engineer | Programmer | Totally in love with you
+                </p>
+                <p>
+                    I like to make robots, swim and see your beautiful face
+                </p>
+                <div class="enlaces">
+                    <a href="https://web.facebook.com/juan.andres.montoya.angulo" target="_blank"><img class="link" src="{{ url_for('static', filename='./images/facebook.png') }}" alt="logo facebook"></a>
+                    <a href="https://www.instagram.com/andresm22_04/" target="_blank"><img class="link" src="{{ url_for('static', filename='./images/instagram.png') }}" alt="logo instagram"></a>
+                    <a href="https://github.com/AMontoya224" target="_blank"><img class="link" src="{{ url_for('static', filename='./images/github.png') }}" alt="logo github"></a>
+                    <a href="https://www.linkedin.com/in/juan-andres-montoya-angulo-a33253226/" target="_blank"><img class="link" src="{{ url_for('static', filename='./images/linkedin.png') }}" alt="logo linkedin"></a>
+                </div>
+            </div>
+        </footer>
+        <img class="marco" src="{{ url_for('static', filename='./images/marco2.png') }}" alt="marco">
+        <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+    </body>
+</html>
